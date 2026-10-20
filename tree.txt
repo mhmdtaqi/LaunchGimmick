@@ -1,0 +1,56 @@
+
+/Users/macbook/Desktop/projek/lg
+├── .env
+├── .env.example
+├── .gitignore
+├── README.md
+├── database.rules.json
+├── dist
+|  ├── assets
+|  |  ├── index-20d6aaf2.css
+|  |  └── index-d9f86fbe.js
+|  ├── index.html
+|  ├── video.mp4
+|  ├── video2.mp4
+|  └── video3.mp4
+├── index.html
+├── package-lock.json
+├── package.json
+├── public
+|  ├── video.mp4
+|  ├── video1.mp4
+|  ├── video3.mp4
+|  └── video4.mp4
+├── scripts
+|  ├── delete-user.mjs
+|  └── seed.mjs
+├── serviceAccountKey.json
+├── src
+|  ├── App.jsx
+|  ├── components
+|  |  ├── HoldButton.jsx
+|  |  ├── LaunchSphere.jsx
+|  |  ├── ProgressBar.jsx
+|  |  └── StandbyText.jsx
+|  ├── context
+|  |  └── AuthContext.jsx
+|  ├── firebase.js
+|  ├── hooks
+|  |  └── useLaunch.js
+|  ├── index.css
+|  ├── main.jsx
+|  └── pages
+|     ├── Admin.jsx
+|     ├── AllUserButtons.jsx
+|     ├── Launch.jsx
+|     ├── Login.jsx
+|     └── Trigger.jsx
+├── tree.txt
+└── vite.config.js
+
+directory: 1647 file: 7829 symboliclink: 20
+
+ignored: directory (18)
+
+
+[2K[1G

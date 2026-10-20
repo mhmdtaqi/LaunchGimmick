@@ -1,0 +1,38 @@
+# logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# dependencies
+node_modules
+dist
+dist-ssr
+
+# firebase
+.firebase
+.firebaserc
+firebase-debug.log
+firestore-debug.log
+database-debug.log
+
+# env
+.env
+.env.local
+.env.*.local
+
+# editor
+.vscode/*
+!.vscode/extensions.json
+.idea
+.DS_Store
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# vite
+*.local
+serviceAccountKey.json

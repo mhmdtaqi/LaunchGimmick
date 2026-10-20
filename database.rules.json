@@ -1,0 +1,20 @@
+{
+  "rules": {
+    "accounts": {
+      ".read": "auth != null",
+      "$uid": {
+        ".write": "auth != null"
+      }
+    },
+    "approvals": {
+      ".read": true,
+      "$uid": {
+        ".write": "auth != null"
+      }
+    },
+    "launch_status": {
+      ".read": true,
+      ".write": "auth != null"
+    }
+  }
+}
