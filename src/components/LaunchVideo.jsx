@@ -19,7 +19,7 @@ const FADE_SEC = 1.2 // durasi fade in (detik)
 const FADE_DELAY = 0.35 // jeda sebelum fade in (beri ruang flash ledakan memudar)
 
 
-export default function LaunchVideo({ src = '/launch-video.mp4', onBack }) {
+export default function LaunchVideo({ src = '/launch-video.mp4' }) {
   const videoRef = useRef(null)
 
   useEffect(() => {
@@ -68,7 +68,6 @@ export default function LaunchVideo({ src = '/launch-video.mp4', onBack }) {
       />
       {/* Flash ledakan memudar halus -> video terlihat mulus di bawahnya */}
       <div className="video-flash-out" aria-hidden="true" />
-      {onBack}
     </div>
   )
 }

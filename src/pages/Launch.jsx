@@ -1,6 +1,6 @@
 import { Suspense, useEffect, useRef, useState } from 'react'
 import { Canvas, useThree } from '@react-three/fiber'
-import { Link, useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import LaunchSphere from '../components/LaunchSphere'
 import LaunchVideo from '../components/LaunchVideo'
 import ProgressBar from '../components/ProgressBar'
@@ -92,14 +92,7 @@ export default function Launch() {
 
   if (phase === 'video') {
     return (
-      <LaunchVideo
-        src="/launch-video.mp4"
-        onBack={
-          <Link to="/" onClick={() => setPhase('standby')} className="video-back">
-            ← Kembali standby
-          </Link>
-        }
-      />
+      <LaunchVideo src="/launch-video.mp4" />
     )
   }
 
