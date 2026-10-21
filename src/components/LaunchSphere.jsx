@@ -31,7 +31,7 @@ export default function LaunchSphere({ ratio = 0, approvedCount = 0, launching =
   const NEON_TOSCA = useMemo(() => new THREE.Color('#22d3ee'), [])
   const NEON_WHITE = useMemo(() => new THREE.Color('#ffffff'), [])
   const cycleColor = useMemo(() => new THREE.Color('#facc15'), [])
-  const CYCLE_SEC = 12
+  const CYCLE_SEC = 12.0
 
   // Tekstur bayangan blob (radial gradient) — dibuat sekali via canvas 2D.
   const shadowTex = useMemo(() => {
@@ -111,7 +111,7 @@ export default function LaunchSphere({ ratio = 0, approvedCount = 0, launching =
     const pulse = 1.35 + ratio * 0.9 + Math.sin(state.clock.elapsedTime * 2.2) * 0.15
     rimMat.uniforms.uIntensity.value = launching ? 2.2 : pulse
 
-    // Wave signal: 3 cincin per 1 approved (0 = tidak ada), cap WAVE_MAX
+    // Wave signal: 2 cincin per 1 approved (0 = tidak ada), cap WAVE_MAX
     const t = state.clock.elapsedTime
     const visibleCount = launching
       ? WAVE_MAX

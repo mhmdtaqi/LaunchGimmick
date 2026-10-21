@@ -2,7 +2,9 @@ import { Suspense, useEffect, useRef, useState } from 'react'
 import { Canvas, useThree } from '@react-three/fiber'
 import { Link, useNavigate } from 'react-router-dom'
 import LaunchSphere from '../components/LaunchSphere'
+import LaunchVideo from '../components/LaunchVideo'
 import ProgressBar from '../components/ProgressBar'
+
 import StandbyText from '../components/StandbyText'
 import { useLaunch } from '../hooks/useLaunch'
 
@@ -31,8 +33,8 @@ export default function Launch() {
   const { ratio, percent, isLaunched, totalApproved } = useLaunch()
   const navigate = useNavigate()
   const [phase, setPhase] = useState('standby') // standby | launching | video
-  const videoRef = useRef(null)
   const timerRef = useRef(null)
+
   // Fade-in di awal + fade-out di akhir background video (proporsional, via rAF).
   // Opacity dihitung kontinu dari currentTime agar loop menghitam smooth.
   const bgVideoRef = useRef(null)
@@ -73,44 +75,37 @@ export default function Launch() {
     }
   }, [])
 
+  // Pindah ke phase 'launching' saat isLaunched true
   useEffect(() => {
     if (isLaunched && phase === 'standby') {
       setPhase('launching')
-      // Transisi cepat ~1.6 detik lalu masuk video
+    }
+  }, [isLaunched, phase])
+
+  // Timer: setelah ~1.6 detik di phase 'launching', masuk ke phase 'video'
+  useEffect(() => {
+    if (phase === 'launching') {
       timerRef.current = setTimeout(() => setPhase('video'), 1600)
     }
     return () => { if (timerRef.current) clearTimeout(timerRef.current) }
-  }, [isLaunched, phase])
-
-  useEffect(() => {
-    if (phase === 'video' && videoRef.current) {
-      videoRef.current.play().catch(() => {})
-      // Fullscreen otomatis saat launch (best-effort, boleh gagal tanpa error)
-      const el = videoRef.current
-      if (el.requestFullscreen) el.requestFullscreen().catch(() => {})
-    }
   }, [phase])
 
   if (phase === 'video') {
     return (
-      <div className="video-full">
-        <video
-          ref={videoRef}
-          src="/video.mp4"
-          autoPlay
-          controls
-          playsInline
-          className="video-el"
-        />
-        <Link to="/" onClick={() => setPhase('standby')} className="video-back">
-          ← Kembali standby
-        </Link>
-      </div>
+      <LaunchVideo
+        src="/launch-video.mp4"
+        onBack={
+          <Link to="/" onClick={() => setPhase('standby')} className="video-back">
+            ← Kembali standby
+          </Link>
+        }
+      />
     )
   }
 
   return (
     <div className="launch-page">
+
       {phase === 'launching' && <div className="launch-flash" />}
 
       {/* Background video: fade-in 0->penuh di 1.2s pertama, fade-out penuh->0 di 1.2s terakhir */}

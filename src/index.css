@@ -142,8 +142,8 @@ a { color: var(--cyan2); }
 @keyframes blink { 50% { opacity: 0.35; } }
 .launch-flash {
   position: fixed; inset: 0; z-index: 50; pointer-events: none;
-  background: radial-gradient(circle at 50% 45%, #fff 0%, #fef9c3 25%, #22d3ee 55%, transparent 75%);
-  animation: flashZoom 1.6s ease-out forwards;
+  background: radial-gradient(circle at 50% 45%, #fff 0%, #fef9c3 25%, #efecec 55%, transparent 75%);
+  animation: flashZoom 5s ease-out forwards;
 }
 @keyframes flashZoom { 0% { opacity: 0; transform: scale(0.6); } 25% { opacity: 1; transform: scale(1); } 100% { opacity: 1; transform: scale(1.6); } }
 
@@ -448,10 +448,48 @@ a { color: var(--cyan2); }
 .hold-wrap.approved .ring-fg { stroke: #4ade80; filter: drop-shadow(0 0 8px #4ade80); transition: stroke 0.5s ease, stroke-dashoffset 0.45s var(--ease-smooth), filter 0.5s ease; }
 .hold-hint { color: var(--muted); font-size: 13px; margin: 0; animation: blink 1.8s infinite; transition: opacity 0.3s ease; }
 
-/* ===== Video full ===== */
-.video-full { position: fixed; inset: 0; background: #000; display: grid; place-items: center; }
-.video-el { width: 100vw; height: 100vh; object-fit: contain; background: #000; }
+/* ===== Video launch (muncul setelah ledakan orb) ===== */
+/* Container: satu halaman penuh, background hitam, video di-center */
+.video-full {
+  position: fixed; inset: 0;
+  background: #000;
+  display: grid; place-items: center;
+  overflow: hidden;
+}
+/*
+  Video memakai object-fit: contain:
+  - proporsi asli terjaga (TIDAK di-stretch)
+  - kalau tidak muat, tidak keluar dari layar (TIDAK melewati layar)
+  - sisa ruang ditandai background hitam container
+*/
+.video-el {
+  width: 100%;
+  height: 100%;
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  object-position: center center;
+  background: #000;
+  /* Opacity (fade in/out) dikendalikan rAF di komponen LaunchVideo */
+  will-change: opacity;
+}
+
+
+/* Flash ledakan yang memudar saat video muncul (transisi mulus) */
+.video-flash-out {
+  position: absolute; inset: 0;
+  z-index: 5;
+  pointer-events: none;
+  background: radial-gradient(circle at 50% 45%, #fff 0%, #fef9c3 25%, #efecec 55%, transparent 78%);
+  animation: flashFadeOut 0.7s ease-out forwards;
+}
+
+@keyframes flashFadeOut {
+  0% { opacity: 1; transform: scale(1.15); }
+  100% { opacity: 0; transform: scale(1.6); }
+}
 .video-back { position: fixed; top: 14px; left: 14px; z-index: 10; font-size: 13px; text-decoration: none; background: rgba(0,0,0,0.6); padding: 8px 12px; border-radius: 8px; }
+
 
 /* ===== Semua User Buttons page ===== */
 .buttons-page {
